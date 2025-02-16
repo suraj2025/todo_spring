@@ -1,5 +1,5 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17 AS build
+# Use an official OpenJDK 21 runtime as a parent image
+FROM openjdk:21 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -21,7 +21,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Use a smaller runtime image for the final container
-FROM openjdk:17
+FROM openjdk:21
 WORKDIR /app
 
 # Copy the built JAR file from the previous stage
