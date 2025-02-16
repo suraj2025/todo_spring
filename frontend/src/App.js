@@ -53,6 +53,7 @@ const App = () => {
 
   // Delete a task (Update backend)
   const deleteTask = async (id) => {
+   
     try {
       await axios.delete(`http://localhost:8080/tasks/${id}`);
       setTasks(tasks.filter((task) => task.id !== id));
