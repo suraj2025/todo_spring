@@ -12,7 +12,7 @@ const App = () => {
   const [editText, setEditText] = useState("");
 
   // Fetch tasks from backend
-  const url="https://todo-backend-h0wb.onrender.com";
+  const url="http://localhost:8080";
   useEffect(() => {
     const fetchTasks = async () => {
       try {
