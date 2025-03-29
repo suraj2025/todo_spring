@@ -12,10 +12,11 @@ const App = () => {
   const [editText, setEditText] = useState("");
 
   // Fetch tasks from backend
+  const url="https://todo-backend-h0wb.onrender.com";
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/tasks");
+        const response = await axios.get(url);
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -28,7 +29,7 @@ const App = () => {
   const addTask = async () => {
     if (newTask.trim()) {
       try {
-        const response = await axios.post("http://localhost:8080/tasks", {
+        const response = await axios.post(`${url}/tasks`, {
           text: newTask,
           completed: false,
         });
@@ -44,7 +45,7 @@ const App = () => {
   const toggleTaskCompletion = async (task) => {
     try {
       const updatedTask = { ...task, completed: !task.completed };
-      await axios.put(`http://localhost:8080/tasks/${task.id}`, updatedTask);
+      await axios.put(`${url}/tasks/${task.id}`, updatedTask);
       setTasks(tasks.map((t) => (t.id === task.id ? updatedTask : t)));
     } catch (error) {
       console.error("Error updating task:", error);
@@ -55,7 +56,7 @@ const App = () => {
   const deleteTask = async (id) => {
    
     try {
-      await axios.delete(`http://localhost:8080/tasks/${id}`);
+      await axios.delete(`${url}/tasks/${id}`);
       setTasks(tasks.filter((task) => task.id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -71,7 +72,7 @@ const App = () => {
   // Save edited task (Update backend)
   const saveEdit = async (id) => {
     try {
-      await axios.put(`http://localhost:8080/tasks/${id}`, { text: editText });
+      await axios.put(`${url}/tasks/${id}`, { text: editText });
       setTasks(tasks.map((task) => (task.id === id ? { ...task, text: editText } : task)));
       setEditingTask(null);
     } catch (error) {
