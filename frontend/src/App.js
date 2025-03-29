@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(`${url}/tasks`);
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
